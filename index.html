@@ -11,7 +11,8 @@
       width: 100vh;
       border: red solid 2px;
       display: grid;
-      grid-template-columns: repeat(15, 1fr);
+      grid-template-columns: repeat(20, 1fr);
+      background-color: #8DBFFF;
     }
     main > div{
       border: red solid 2px;
@@ -19,92 +20,22 @@
     .ground{
       background-color: brown;
     }
+    .top{
+      background-color: green;
+    }
     .tree{
       background-color: saddlebrown;
+      background-image: none;
     }
+    .rock{
+      background-color: grey;
+    }
+    
   </style>
 </head>
 <body>
   <main></main>
   <nav></nav>
-  <script>
-    function randomBetween(min, max){
-      return Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
-
-    class Tree {
-      constructor(_x) {
-        this.x = _x;
-        this.trunkHeight = randomBetween(2, 4);
-        this.topHeight = randomBetween(2, 5);
-      }
-      getCells(gridCellsNum, groundHeight){
-        return {
-          startX: this.x,
-          endX: this.x,
-          startY: gridCellsNum - 1 - groundHeight - this.trunkHeight,
-          endY: gridCellsNum - 1 - groundHeight,
-        }
-      }
-    }
-    class Rock {
-      constructor(_startX, _width) {
-        this.startX = _startX;
-        this.width = _width;
-        this.height = randomBetween(1, 2);
-      }
-      
-    }
- 
-    // create the main grid - 15*15
-    const mainGrid = [];
-    const gridCellsNum = 15;
-
-    // randomize elelments
-    let freeCells = [...Array(gridCellsNum).keys()];
-    // create ground
-    const groundHeight = randomBetween(3, 5);
-    //create trees
-    const treesNum = randomBetween(1, 3);
-    const trees = [];
-    for (let i = 0; i < treesNum; i++){
-      let freeCellIndex = randomBetween(0, freeCells.length - 1);
-      let start = freeCells[freeCellIndex];
-      freeCells.splice(freeCellIndex, 1);
-      let tree = new Tree(start);
-      trees.push(tree);
-    }
-    //create rocks
-    const rocksNum = randomBetween(1, 4);
-
-    // create the cells
-    for (let x = 0; x < 15; x++){
-      let column = [];
-      mainGrid.push(column);
-      for (let y = 0; y < 15; y++){
-        let cell = document.createElement('div');
-        document.querySelector('main').appendChild(cell);
-        column.push(cell);
-        //ground
-        if (x > (gridCellsNum - 1 - groundHeight)){
-          cell.classList.add('ground');
-        }
-      }
-    }
-
-    //trees
-    for (let i = 0; i < trees.length; i++){
-      let cells = trees[i].getCells(gridCellsNum, groundHeight);
-      console.log(cells);
-      for (let x = cells.startX; x <= cells.endX; x++){
-        console.log(x);
-        for (let y = cells.startY; y <= cells.endY; y++){
-          console.log(x, y);
-          mainGrid[y][x].classList.add('tree');
-          console.log(mainGrid[x][y]);
-        }
-      }
-    }
-  </script>
+  <script src="./index.js"></script>
 </body>
 </html>
