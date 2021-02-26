@@ -1,7 +1,9 @@
+// general functions
 function randomBetween(min, max){
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
+// classes for boardInitialize()
 class Rock {
   constructor(_startY) {
     this.startY = _startY;
@@ -85,8 +87,9 @@ function setCells(){
       mainGrid.push(column);
       for (let y = 0; y < gridCellsNum; y++){
         let cell = document.createElement('div');
-        document.querySelector('main').appendChild(cell);
+        document.querySelector('.board').appendChild(cell);
         column.push(cell);
+        cell.addEventListener("click", ClickOnBoardPanel);
         //ground
         if (x > (gridCellsNum - 1 - groundHeight)){
           cell.classList.add('ground');
@@ -101,21 +104,23 @@ function setCellsClass(arrOfobj, classStr){
     for (let x = cells.startX; x <= cells.endX; x++){
       for (let y = cells.startY; y <= cells.endY; y++){
         if (x >= 0 && x < gridCellsNum && y >= 0 && y < gridCellsNum){
+          if(mainGrid[x][y].classList.value){
+            mainGrid[x][y].classList.value = [];
+          }
           mainGrid[x][y].classList.add(classStr);
         }
-        
       }
     }
   }
 }
 
-// global vars
+// global vars for boardInitialize()
 const mainGrid = [];
 const gridCellsNum = 20;
 const rocks = [];
 const trees = [];
 const tops = [];
-const groundHeight = randomBetween(3, 5);
+const groundHeight = randomBetween(4, 6);
 
 function boardInitialize(){
   let freeCells = [...Array(gridCellsNum).keys()];
@@ -130,3 +135,113 @@ function boardInitialize(){
 }
 
 boardInitialize();
+
+// classes for gameInitialize()
+class ToolOrTile{
+  constructor(_class, _tile, _addOrRemove){
+    this.class = _class;
+    this.tile = _tile;
+    this.addOrRemove = _addOrRemove;
+  }
+
+  getClass(){
+    return this.class;
+  }
+}
+
+// helper-functions for gameInitialize()
+function toolsCreateAndStore(toolsArr){
+  console.log('toolsCreateAndStore() is running')
+  toolsArr.push(new ToolOrTile('axe', 'tree', 'remove'));
+  toolsArr.push(new ToolOrTile('pickaxe', 'rock', 'remove'));
+  toolsArr.push(new ToolOrTile('shovel', 'ground', 'remove'));
+}
+
+function toolsDisplayAndCreateEvents(toolsArr){
+  console.log('toolsDisplayAndCreateEvents() is running')
+
+  for (let i = 0; i < toolsArr.length; i++){
+    let tool = document.createElement('div');
+    document.querySelector('nav').appendChild(tool);
+    tool.classList.add(toolsArr[i].getClass());
+    tool.classList.add('tool');
+    tool.addEventListener("click", ClickOnTool);
+  }
+}
+
+function addTile(tileName){
+  
+  let tile = document.createElement('div');
+  document.querySelector('nav').appendChild(tile);
+  tile.classList.add(tileName);
+  console.log(tile);
+  tile.classList.add('tile');
+  availableTiles.push(tile);
+  tile.addEventListener("click", ClickOnTile);
+}
+
+function removeTile(tile){
+  let index = availableTiles.indexOf(tile);
+  availableTiles.splice(index, 1);
+  tile.remove();
+}
+
+// global vars for gameInitialize()
+let currentToolOrTile = {
+  name: 'axe',
+  type: 'tool'
+};
+let availableTiles = [];
+let tools = [];
+
+function gameInitialize(){
+  toolsCreateAndStore(tools);
+  toolsDisplayAndCreateEvents(tools);
+  //try
+  addTile('ground');
+  addTile('rock');
+  addTile('rock');
+  addTile('tree');
+  addTile('top');
+  removeTile(availableTiles[2]);
+  
+}
+gameInitialize();
+
+//event functions
+function ClickOnTool(event){
+  let tool = event.target; 
+  currentToolOrTile.type = 'tool';
+  currentToolOrTile.name = tool.classList[0];
+}
+
+function ClickOnTile(event){
+  let tile = event.target; 
+  currentToolOrTile.type = 'tile';
+  currentToolOrTile.name = tile.classList[0];
+}
+
+function ClickOnBoardPanel(event){
+  let cell = event.target; 
+  console.log(cell);
+  // tile
+  if(currentToolOrTile.type === 'tile'){
+    if (!cell.classList.value){
+      cell.classList.add(currentToolOrTile.name); 
+    }
+  }
+}
+
+// - click on board panel
+//   - get the panel index
+//   - get the panel class
+//   - check current tool / tile
+//   - if tool:
+//       if panel class === tool tile:
+//         remove panel class & call addTile(tile).
+//       else: the tool icon background change to red
+//   - if tile:
+//       if panel have no class:
+//         panel class = tile & call removeTile & current tool / tile = none
+//       else:
+//         the tile icon border change to red

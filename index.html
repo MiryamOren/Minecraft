@@ -6,17 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      width: 100vw;
+      display: flex;
+    }
+    nav{
+      background-color: black;
+      height: 100vh;
+      width: 10%;
+      display: inline-block;
+      display: flex;
+      flex-direction: column;
+      padding-top: 5%;
+      align-items: center;
+    }
     main{
+      width: 90%;
+      display: inline-block;
+    }
+    .board{
       height: 100vh;
       width: 100vh;
-      border: red solid 2px;
+      margin: auto;
+      border: #fff solid 1px;
       display: grid;
       grid-template-columns: repeat(20, 1fr);
       background-color: #8DBFFF;
     }
-    main > div{
-      border: red solid 2px;
+    .board > div{
+      border: #fff solid 1px;
     }
+
+    /* tiles */
     .ground{
       background-color: brown;
     }
@@ -25,16 +51,41 @@
     }
     .tree{
       background-color: saddlebrown;
-      background-image: none;
     }
     .rock{
       background-color: grey;
     }
+    /* tools */
+    .tool{
+      height: 100px;
+      width: 100px;
+      border: 2px solid #fff;
+      margin-bottom: 20px;
+    }
+    .axe{
+      background: url(./img/150px-Diamond_Axe.png) no-repeat center center/cover;
+    }
+    .pickaxe{
+      background: url(./img/150px-Diamond_Pickaxe.png) no-repeat center center/cover;
+    }
+    .shovel{
+      background: url(./img/150px-Diamond_Shovel.png) no-repeat center center/cover;
+    }
+    /* tiles */
+    .tile{
+      height: 50px;
+      width: 50px;
+      border: 2px solid #fff;
+      margin-bottom: 20px;
+    }
+
     
   </style>
 </head>
 <body>
-  <main></main>
+  <main>
+    <div class="board"></div>
+  </main>
   <nav></nav>
   <script src="./index.js"></script>
 </body>
