@@ -1,10 +1,10 @@
 @font-face {
   font-family: minecraft-italic;
-  src: url(./fonts/MinecraftItalic-R8Mo.otf);
+  src: url(../fonts/MinecraftItalic-R8Mo.otf);
 }
 @font-face {
   font-family: minecraft-bold;
-  src: url(./fonts/MinecraftBold-nMK1.otf);
+  src: url(../fonts/MinecraftBold-nMK1.otf);
 }
 *{
   box-sizing: border-box;
@@ -12,6 +12,7 @@
   padding: 0;
   font-family: minecraft-italic;
   color: #fff;
+  overflow: hidden;
 }
 body{
   width: 100vw;
@@ -24,19 +25,19 @@ body{
 }
 header{
   width: 60%;
-  height: 25%;
+  height: 50%;
 }
 header img{
   width: 100%;
 }
 main{
   width: 70%;
-  height: 50%;
+  height: 60%;
 }
 main h1{
   text-align: center;
   font-family: minecraft-bold;
-  font-size: 5rem;
+  font-size: 4rem;
   margin: 0;
 }
 main .tutorial{
@@ -46,8 +47,7 @@ main .tutorial{
   justify-content: space-between;
 }
 main .tutorial .tool{
-  width: 25%;
-  padding: 20px;
+  width: 30%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -64,20 +64,20 @@ main .tutorial .tool .icon p{
 }
 main .tutorial .tool .description{
   width: 50%;
-  padding-left: 3rem;
+  padding-left: 0rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 main .tutorial .tool .description p{
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 a{
   text-decoration: none;
   font-family: minecraft-bold;
-  font-size: 5rem;
-  margin-top: 3rem;
+  font-size: 4rem;
+  margin-top: 2rem;
   border: 2px #fff solid;
-  padding: 0.5rem 2rem;
+  padding: 1.3rem 2rem;
   cursor: pointer;
 }

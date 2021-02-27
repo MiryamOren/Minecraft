@@ -125,8 +125,10 @@ let rocks = [];
 let trees = [];
 let tops = [];
 let groundHeight = randomBetween(4, 6);
+const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
 function boardInitialize(){
+  document.querySelector('.container').style.width = width.toString() + 'px';
   let freeCells = [...Array(gridCellsNum).keys()];
   createAndStoreElements(Rock, rocks, freeCells); 
   createAndStoreElements(Tree, trees, freeCells);

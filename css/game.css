@@ -11,6 +11,18 @@ body{
   width: 100vw;
   height: 100vh;
   display: flex;
+  /*  */
+  position: relative;
+  overflow: auto;
+}
+
+.container {
+  margin: auto;
+  font-family: var(--font);
+  position: absolute;
+  width: var(--width);
+  width: 1350px;
+  display: flex;
 }
 nav{
   background-color: black;
@@ -64,6 +76,7 @@ main{
 }
 .board > div:hover{
   border: #fff solid 1px;
+  margin: -1px;
 }
 
 /* celles & tiles */
