@@ -179,7 +179,7 @@ function addTile(tileName){
   tile.classList.add(tileName);
   console.log(tile);
   tile.classList.add('tile');
-  if (availableTiles.length === 5){
+  if (availableTiles.length === 4){
     removeTile(availableTiles[0]);
   }
   availableTiles.push(tile);
