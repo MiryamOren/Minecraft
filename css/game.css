@@ -103,6 +103,7 @@ main{
   padding: 5px;
   border: 2px solid #fff;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 .axe{
   background: url(../img/tool-icons/Diamond_Axe_JE1_BE1.png) no-repeat center center/cover;
@@ -123,6 +124,7 @@ main{
   width: 6vh;
   border: 2px solid #fff;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 .tile.clicked{
   border: 4px solid blue;
