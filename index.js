@@ -115,12 +115,12 @@ function setCellsClass(arrOfobj, classStr){
 }
 
 // global vars for boardInitialize()
-const mainGrid = [];
-const gridCellsNum = 20;
-const rocks = [];
-const trees = [];
-const tops = [];
-const groundHeight = randomBetween(4, 6);
+let mainGrid = [];
+let gridCellsNum = 20;
+let rocks = [];
+let trees = [];
+let tops = [];
+let groundHeight = randomBetween(4, 6);
 
 function boardInitialize(){
   let freeCells = [...Array(gridCellsNum).keys()];
@@ -150,33 +150,36 @@ class ToolOrTile{
 }
 
 // helper-functions for gameInitialize()
-function toolsCreateAndStore(toolsArr){
+function toolsCreateAndStore(toolsStore){
   console.log('toolsCreateAndStore() is running')
-  toolsArr.push(new ToolOrTile('axe', 'tree', 'remove'));
-  toolsArr.push(new ToolOrTile('pickaxe', 'rock', 'remove'));
-  toolsArr.push(new ToolOrTile('shovel', 'ground', 'remove'));
+  toolsStore['axe'] = (new ToolOrTile('axe', ['tree', 'top'], 'remove'));
+  toolsStore['pickaxe'] = (new ToolOrTile('pickaxe', ['rock'], 'remove'));
+  toolsStore['shovel'] = (new ToolOrTile('shovel', ['ground'], 'remove'));
 }
 
-function toolsDisplayAndCreateEvents(toolsArr){
+function toolsDisplayAndCreateEvents(toolsStore){
   console.log('toolsDisplayAndCreateEvents() is running')
 
-  for (let i = 0; i < toolsArr.length; i++){
+  Object.values(toolsStore).forEach(element => {
     let tool = document.createElement('div');
-    document.querySelector('nav').appendChild(tool);
-    tool.classList.add(toolsArr[i].getClass());
+    document.querySelector('.tools-tiles-container').appendChild(tool);
+    tool.classList.add(element.getClass());
     tool.classList.add('tool');
     tool.addEventListener("click", ClickOnTool);
-  }
+  });
 }
 
 function addTile(tileName){
-  
   let tile = document.createElement('div');
-  document.querySelector('nav').appendChild(tile);
+  document.querySelector('.tools-tiles-container').appendChild(tile);
   tile.classList.add(tileName);
   console.log(tile);
   tile.classList.add('tile');
+  if (availableTiles.length === 5){
+    removeTile(availableTiles[0]);
+  }
   availableTiles.push(tile);
+  
   tile.addEventListener("click", ClickOnTile);
 }
 
@@ -188,37 +191,44 @@ function removeTile(tile){
 
 // global vars for gameInitialize()
 let currentToolOrTile = {
-  name: 'axe',
-  type: 'tool'
+  div: null,
+  type: null,
+  name: null
 };
 let availableTiles = [];
-let tools = [];
+let tools = {};
 
 function gameInitialize(){
   toolsCreateAndStore(tools);
   toolsDisplayAndCreateEvents(tools);
-  //try
-  addTile('ground');
-  addTile('rock');
-  addTile('rock');
-  addTile('tree');
-  addTile('top');
-  removeTile(availableTiles[2]);
-  
 }
 gameInitialize();
 
 //event functions
 function ClickOnTool(event){
   let tool = event.target; 
+  console.log(event.target);
+  if(currentToolOrTile.div){
+    currentToolOrTile.div.classList.remove('clicked');
+  }
   currentToolOrTile.type = 'tool';
+  currentToolOrTile.div = tool; //.classList[0];
   currentToolOrTile.name = tool.classList[0];
+
+  tool.classList.add('clicked');
 }
 
 function ClickOnTile(event){
   let tile = event.target; 
+  //ceck
+  console.log(currentToolOrTile.div); //.classList
+  if(currentToolOrTile.div){
+    currentToolOrTile.div.classList.remove('clicked');
+  }
   currentToolOrTile.type = 'tile';
+  currentToolOrTile.div = tile; //.classList[0]
   currentToolOrTile.name = tile.classList[0];
+  tile.classList.add('clicked');
 }
 
 function ClickOnBoardPanel(event){
@@ -228,9 +238,46 @@ function ClickOnBoardPanel(event){
   if(currentToolOrTile.type === 'tile'){
     if (!cell.classList.value){
       cell.classList.add(currentToolOrTile.name); 
+      removeTile(currentToolOrTile.div);
+      currentToolOrTile = {};
+    }
+    else{
+      // currentToolOrTile.div.classList.add('non-valid');
     }
   }
+  else if(currentToolOrTile.type === 'tool'){
+    tool = tools[currentToolOrTile.name];
+    if (tool.tile.includes(cell.classList[0])){
+      addTile(cell.classList[0]);
+      cell.classList.remove(cell.classList[0]);
+    } else{
+      // currentToolOrTile.div.classList.add('non-valid');
+    }
+  }
+
 }
+
+//reset
+document.querySelector('.new-game').addEventListener('click', () => {
+  document.querySelector('.board').innerHTML = null;
+  mainGrid = [];
+  gridCellsNum = 20;
+  rocks = [];
+  trees = [];
+  tops = [];
+  groundHeight = randomBetween(4, 6);
+  boardInitialize();
+
+  document.querySelector('.tools-tiles-container').innerHTML = null;
+  currentToolOrTile = {
+    div: null,
+    type: null,
+    name: null
+  };
+  availableTiles = [];
+  tools = {};
+  gameInitialize();
+});
 
 // - click on board panel
 //   - get the panel index
