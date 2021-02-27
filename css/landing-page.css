@@ -86,13 +86,13 @@ main .tutorial .tool .description{
 main .tutorial .tool .description p{
   font-size: 2rem;
 }
-a{
+a {
   text-decoration: none;
   font-family: minecraft-bold;
-  font-size: 4rem;
+  font-size: 3rem;
   margin-top: 2rem;
   border: 2px #fff solid;
-  padding: 1.3rem 2rem;
+  padding: 1.8rem 2.5rem;
   cursor: pointer;
 }
 
@@ -111,6 +111,7 @@ a{
   font-family: 'Raleway', sans-serif;
   color: #fff;
 }
+
 /* mobile - portrait */
 @media only screen and (orientation:portrait){
     .container {
@@ -134,27 +135,14 @@ a{
       width: 80%;
       height: 35%;
     }
-    /* header img{
-      width: 100%;
-    } */
     main{
       width: 90%;
-      /* height: 60%; */
     }
     main h1{
       font-size: 2rem;
     }
-    /* main .tutorial{
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    } */
     main .tutorial .tool{
       width: 30%;
-      /* display: flex;
-      flex-direction: row;
-      justify-content: space-between; */
     }
     main .tutorial .tool .icon{
       width: 30%;
@@ -175,5 +163,4 @@ a{
       font-size: 1.3rem;
       padding: 1rem 2rem;
     }
-    
 } 

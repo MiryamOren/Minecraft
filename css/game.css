@@ -81,6 +81,9 @@ main{
 .ground{
   background: url(../img/tiles/soil.jpg) no-repeat center center/cover;
 }
+.cloud{
+  background: #fff;
+}
 .top{
   background: url(../img/tiles/tree-leaves.png) no-repeat center center/cover;
 }

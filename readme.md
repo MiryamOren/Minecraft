@@ -53,13 +53,5 @@ JS
             the tile icon border change to red
 
 
-global vars declerations 
-bordInitialize()
-gameInitialize()
-
-functions
-bordInitialize
-gameInitialize
-
 
           

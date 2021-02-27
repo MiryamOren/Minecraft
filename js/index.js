@@ -97,7 +97,36 @@ function setCells(){
       }
     }
   }
-
+function createCloud(){
+  let startX = randomBetween(0, gridCellsNum - groundHeight - 3);
+  let startY = randomBetween(0, gridCellsNum - 3);
+  let cloudCells = [
+                    // buttom
+                    [startX + 1, startY + 4],
+                    [startX + 1, startY + 5],
+                    // new line
+                    [startX, startY], 
+                    [startX, startY + 1],
+                    [startX, startY + 2],
+                    [startX, startY + 3],
+                    [startX, startY + 4],
+                    [startX, startY + 5],
+                    // new line
+                    [startX - 1, startY + 1],
+                    [startX - 1, startY + 2],
+                    [startX - 1, startY + 3],
+                    [startX - 1, startY + 4],
+                    [startX - 1, startY + 5],
+                    [startX - 1, startY + 6],
+                    //top
+                    [startX - 2, startY + 3],
+                  ];
+  cloudCells.forEach(cell => {
+    if (cell[0] >= 0 && cell[0] < gridCellsNum && cell[1] >= 0 && cell[1] < gridCellsNum){
+      mainGrid[cell[0]][cell[1]].classList.add('cloud');
+    }
+  });              
+}
 function setCellsClass(arrOfobj, classStr){
   for (let i = 0; i < arrOfobj.length; i++){
     let cells = arrOfobj[i].getCells(gridCellsNum, groundHeight);
@@ -140,6 +169,8 @@ function boardInitialize(){
   createAndStoreElements(Tree, trees, freeCells);
 
   setCells()
+
+  createCloud();
 
   setCellsClass(tops, 'top');
   setCellsClass(trees, 'tree');
