@@ -8,7 +8,6 @@ class Rock {
   constructor(_startY) {
     this.startY = _startY;
     this.height = randomBetween(1, 2);
-    // this.width = _width;
   }
   getCells(gridCellsNum, groundHeight){
     return {
@@ -21,9 +20,6 @@ class Rock {
   // num of rocks
   static minMax(){
     return [2, 4];
-  }
-  static maxWidth(){
-    return 2;
   }
 }
 
@@ -118,6 +114,17 @@ function setCellsClass(arrOfobj, classStr){
   }
 }
 
+function handelBoardResponsiveness(){
+  console.log('handelBoardResponsiveness() is running');
+  const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+  document.querySelector('.container').style.width = width.toString() + 'px';
+  // if mobile
+  if (screen.availHeight < 480) {
+    gridCellsNum = 10;
+    groundHeight = randomBetween(1, 2);
+    console.log('im a mobile');
+  }
+}
 // global vars for boardInitialize()
 let mainGrid = [];
 let gridCellsNum = 20;
@@ -125,10 +132,9 @@ let rocks = [];
 let trees = [];
 let tops = [];
 let groundHeight = randomBetween(4, 6);
-const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
 function boardInitialize(){
-  document.querySelector('.container').style.width = width.toString() + 'px';
+  handelBoardResponsiveness();
   let freeCells = [...Array(gridCellsNum).keys()];
   createAndStoreElements(Rock, rocks, freeCells); 
   createAndStoreElements(Tree, trees, freeCells);
@@ -181,7 +187,7 @@ function addTile(tileName){
   tile.classList.add(tileName);
   console.log(tile);
   tile.classList.add('tile');
-  if (availableTiles.length === 4){
+  if (availableTiles.length === inventoryAmount){
     removeTile(availableTiles[0]);
   }
   availableTiles.push(tile);
@@ -195,6 +201,15 @@ function removeTile(tile){
   tile.remove();
 }
 
+function handelGameResponsiveness(){
+  console.log('handelGameResponsiveness() is running')
+  // if mobile
+  if (screen.availHeight < 480) {
+    inventoryAmount = 1;
+    console.log('im a mobile');
+  }
+}
+
 // global vars for gameInitialize()
 let currentToolOrTile = {
   div: null,
@@ -203,8 +218,10 @@ let currentToolOrTile = {
 };
 let availableTiles = [];
 let tools = {};
+let inventoryAmount = 4;
 
 function gameInitialize(){
+  handelGameResponsiveness();
   toolsCreateAndStore(tools);
   toolsDisplayAndCreateEvents(tools);
 }
@@ -218,7 +235,7 @@ function ClickOnTool(event){
     currentToolOrTile.div.classList.remove('clicked');
   }
   currentToolOrTile.type = 'tool';
-  currentToolOrTile.div = tool; //.classList[0];
+  currentToolOrTile.div = tool; 
   currentToolOrTile.name = tool.classList[0];
 
   tool.classList.add('clicked');
@@ -227,12 +244,12 @@ function ClickOnTool(event){
 function ClickOnTile(event){
   let tile = event.target; 
   //ceck
-  console.log(currentToolOrTile.div); //.classList
+  console.log(currentToolOrTile.div);
   if(currentToolOrTile.div){
     currentToolOrTile.div.classList.remove('clicked');
   }
   currentToolOrTile.type = 'tile';
-  currentToolOrTile.div = tile; //.classList[0]
+  currentToolOrTile.div = tile;
   currentToolOrTile.name = tile.classList[0];
   tile.classList.add('clicked');
 }

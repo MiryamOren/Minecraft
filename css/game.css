@@ -20,8 +20,6 @@ body{
   margin: auto;
   font-family: var(--font);
   position: absolute;
-  width: var(--width);
-  width: 1350px;
   display: flex;
 }
 nav{
@@ -58,7 +56,7 @@ nav{
   text-align: center;
 }
 main{
-  width: 90%;
+  width: 80%;
   display: inline-block;
 }
 .board{
@@ -134,7 +132,7 @@ main{
 }
 
 
-/* phone */
+/* mobile */
 .warning-message { 
   width: 100vw;
   height: 100vh;
@@ -146,9 +144,10 @@ main{
 .warning-message p{
   font-size: 2rem;
   line-height: 3rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #fff;
 }
+/* mobile - portrait */
 @media only screen and (orientation:portrait){
     .container {
       display:none; 
@@ -157,10 +156,12 @@ main{
       display:block; 
     }
 }
-@media only screen and (orientation:landscape){
+/* mobile: landscape */
+/* max-width: 1024px */
+@media only screen and (max-width: 1000px) and (orientation:landscape){
     .warning-message {
       display:none; 
-    /* }
+    }
     body{
         height: 100vh;
         width: 100vw;
@@ -168,5 +169,42 @@ main{
     .container{
       height: 100vh;
       width: 100vw;
-    } */
+    }
+    nav{
+      width: 30%;
+    }
+    .tool{
+      height: 15vh;
+      width: 15vh;
+      padding: 5px;
+      border: 2px solid #fff;
+      margin-bottom: 20px;
+    }
+    .tile{
+      height: 10vh;
+      width: 10vh;
+      border: 2px solid #fff;
+      margin-bottom: 15px;
+    }
+    .btn{
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px 1px;
+      cursor: pointer;
+      text-align: center;
+    }
+    main{
+      width: 70%;
+    }
+    .board{
+      height: 100vh;
+      width: 100vh;
+      margin: auto;
+      border: #fff solid 1px;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      background-color: #8DBFFF;
+    }
 }
