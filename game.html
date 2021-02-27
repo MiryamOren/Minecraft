@@ -17,12 +17,13 @@
     }
     body{
       width: 100vw;
+      height: 100vh;
       display: flex;
     }
     nav{
       background-color: black;
       height: 100vh;
-      width: 10%;
+      width: 20%;
       display: inline-block;
       display: flex;
       flex-direction: column;
@@ -31,6 +32,7 @@
     }
     .tools-tiles-container{
       height: 80%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -41,8 +43,9 @@
     }
     .btn{
       font-family: minecraft-italic;
-      font-size: 20px;
+      font-size: 2rem;
       color: #fff;
+      text-decoration: none;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -66,34 +69,38 @@
       border: #fff solid 1px;
     }
 
-    /* tiles */
+    /* celles & tiles */
     .ground{
-      background-color: brown;
+      background: url(./img/tiles/soil.jpg) no-repeat center center/cover;
     }
     .top{
-      background-color: green;
+      background: url(./img/tiles/tree-leaves.png) no-repeat center center/cover;
     }
     .tree{
-      background-color: saddlebrown;
+      background: url(./img/tiles/wood2.png) no-repeat center center/cover;
     }
     .rock{
-      background-color: grey;
+      background: url(./img/tiles/rock.png) no-repeat center center/cover;
+    }
+    .grass{
+      background: url(./img/tiles/grass.png) no-repeat center center/cover;
     }
     /* tools */
     .tool{
-      height: 100px;
-      width: 100px;
+      height: 14%;
+      width: 29%;
+      padding: 5px;
       border: 2px solid #fff;
       margin-bottom: 20px;
     }
     .axe{
-      background: url(./img/150px-Diamond_Axe.png) no-repeat center center/cover;
+      background: url(./img/tool-icons/Diamond_Axe_JE1_BE1.png) no-repeat center center/cover;
     }
     .pickaxe{
-      background: url(./img/150px-Diamond_Pickaxe.png) no-repeat center center/cover;
+      background: url(./img/tool-icons/Diamond_Pickaxe_JE1_BE1.png) no-repeat center center/cover;
     }
     .shovel{
-      background: url(./img/150px-Diamond_Shovel.png) no-repeat center center/cover;
+      background: url(./img/tool-icons/Diamond_Shovel_JE1_BE1.png) no-repeat center center/cover;
     }
     .tool.clicked{
       background-color: blue;
@@ -101,8 +108,8 @@
     }
     /* tiles */
     .tile{
-      height: 50px;
-      width: 50px;
+      height: 7%;
+      width: 14%;
       border: 2px solid #fff;
       margin-bottom: 20px;
     }
@@ -127,7 +134,7 @@
     <div class="tools-tiles-container"></div>
     <div class="btns-container">
       <div class="btn new-game">New Game</div>
-      <div class="btn">Back to tutorial</div>
+      <a class="btn" href="./index.html">Back to tutorial</a>
     </div>
   </nav>
   <script src="./index.js"></script>

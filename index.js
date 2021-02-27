@@ -90,8 +90,12 @@ function setCells(){
         document.querySelector('.board').appendChild(cell);
         column.push(cell);
         cell.addEventListener("click", ClickOnBoardPanel);
+        // grass
+        if (x === (gridCellsNum - groundHeight)){
+          cell.classList.add('grass');
+        }
         //ground
-        if (x > (gridCellsNum - 1 - groundHeight)){
+        if (x > (gridCellsNum - groundHeight)){
           cell.classList.add('ground');
         }
       }
@@ -154,7 +158,7 @@ function toolsCreateAndStore(toolsStore){
   console.log('toolsCreateAndStore() is running')
   toolsStore['axe'] = (new ToolOrTile('axe', ['tree', 'top'], 'remove'));
   toolsStore['pickaxe'] = (new ToolOrTile('pickaxe', ['rock'], 'remove'));
-  toolsStore['shovel'] = (new ToolOrTile('shovel', ['ground'], 'remove'));
+  toolsStore['shovel'] = (new ToolOrTile('shovel', ['ground', 'grass'], 'remove'));
 }
 
 function toolsDisplayAndCreateEvents(toolsStore){
@@ -278,17 +282,3 @@ document.querySelector('.new-game').addEventListener('click', () => {
   tools = {};
   gameInitialize();
 });
-
-// - click on board panel
-//   - get the panel index
-//   - get the panel class
-//   - check current tool / tile
-//   - if tool:
-//       if panel class === tool tile:
-//         remove panel class & call addTile(tile).
-//       else: the tool icon background change to red
-//   - if tile:
-//       if panel have no class:
-//         panel class = tile & call removeTile & current tool / tile = none
-//       else:
-//         the tile icon border change to red

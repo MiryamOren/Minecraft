@@ -5,10 +5,118 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    @font-face {
+      font-family: minecraft-italic;
+      src: url(./fonts/MinecraftItalic-R8Mo.otf);
+    }
+    @font-face {
+      font-family: minecraft-bold;
+      src: url(./fonts/MinecraftBold-nMK1.otf);
+    }
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: minecraft-italic;
+      color: #fff;
+    }
+    body{
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #000;
+    }
+    header{
+      width: 60%;
+      margin: 3rem;
+    }
+    header img{
+      width: 100%;
+    }
+    main{
+      width: 70%;
+    }
+    main h1{
+      text-align: center;
+      font-family: minecraft-bold;
+      font-size: 5rem;
+    }
+    main .tutorial{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    main .tutorial .tool{
+      width: 25%;
+      padding: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    main .tutorial .tool .icon{
+      width: 45%;
+    }
+    main .tutorial .tool .icon img{
+      width: 100%;
+    }
+    main .tutorial .tool .icon p{
+      text-align: center;
+      font-size: 2rem;
+    }
+    main .tutorial .tool .description{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    main .tutorial .tool .description p{
+      font-size: 2.5rem;
+    }
+    a{
+      text-decoration: none;
+      font-family: minecraft-bold;
+      font-size: 5rem;
+      margin-top: 3rem;
+      border: 2px #fff solid;
+      padding: 0.5rem 2rem;
+
+    }
+  </style>
 </head>
 <body>
-  <header></header>
-  <div class="tutorial"></div>
+  <header>
+    <img src="./img/minecraft_logo_PNG84.png" alt="">
+  </header>
+  <main>
+    <h1>Tool Tutorial</h1>
+    <div class="tutorial">
+      <div class="tool">
+        <div class="icon">
+          <img src="./img/tool-icons/tool-icons-gif/Enchanted_Diamond_Axe.gif" alt="">
+          <p>Axe</p>
+        </div>
+        <div class="description"><p>Cutting trees</p></div>
+      </div>
+      <div class="tool">
+        <div class="icon">
+          <img src="./img/tool-icons/tool-icons-gif/Enchanted_Diamond_Pickaxe.gif" alt="">
+          <p>Pickaxe</p>
+        </div>
+        <div class="description"><p>Mining rocks</p></div>
+      </div>
+      <div class="tool">
+        <div class="icon">
+          <img src="./img/tool-icons/tool-icons-gif/Enchanted_Diamond_Shovel.gif" alt="">
+          <p>Shovel</p>
+        </div>
+        <div class="description"><p>Digging dirt</p></div>
+      </div>
+    </div>
+  </main>
   <a href="./game.html">Start</a>
 </body>
 </html>
