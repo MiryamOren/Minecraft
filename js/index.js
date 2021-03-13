@@ -19,7 +19,7 @@ class Rock {
   }
   // num of rocks
   static minMax(){
-    return [2, 4];
+    return [1, 4];
   }
 }
 
